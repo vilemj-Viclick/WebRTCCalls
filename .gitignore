@@ -1,0 +1,36 @@
+###################################
+############### npm ###############
+###################################
+
+*.log
+node_modules/
+npm-debug.log
+npm-debug.log.*
+
+###################################
+############## Build ##############
+###################################
+
+dist/
+
+###################################
+############### mac ###############
+###################################
+
+.DS_STORE
+
+###################################
+############### IDE ###############
+###################################
+
+.idea/*
+.vscode/launch.json
+!.idea/codeStyles
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles
+!.idea/jsLibraryMappings.xml
+!.idea/libraries
+!.idea/misc.xml
+!.idea/runConfigurations
+!.idea/typescript-compiler.xml
+!.idea/dictionaries/
