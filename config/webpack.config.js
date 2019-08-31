@@ -25,7 +25,6 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const eslint = require('eslint');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -144,18 +143,6 @@ module.exports = function(webpackEnv) {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
-      // Include an alternative client for WebpackDevServer. A client's job is to
-      // connect to WebpackDevServer by a socket and get notified about changes.
-      // When you save a file, the client will either apply hot updates (in case
-      // of CSS changes), or refresh the page (in case of JS changes). When you
-      // make a syntax error, this client will display a syntax error overlay.
-      // Note: instead of the default WebpackDevServer client, we use a custom one
-      // to bring better experience for Create React App users. You can replace
-      // the line below with these two lines if you prefer the stock client:
-      // require.resolve('webpack-dev-server/client') + '?/',
-      // require.resolve('webpack/hot/dev-server'),
-      isEnvDevelopment &&
-        require.resolve('react-dev-utils/webpackHotDevClient'),
       // Finally, this is your app's code:
       paths.appIndexJs,
       // We include the app code last so that if there is a runtime error during
@@ -189,9 +176,6 @@ module.exports = function(webpackEnv) {
               .replace(/\\/g, '/')
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
-      // Prevents conflicts when multiple Webpack runtimes (from different apps)
-      // are used on the same page.
-      jsonpFunction: `webpackJsonp${appPackageJson.name}`,
     },
     optimization: {
       minimize: isEnvProduction,
@@ -542,8 +526,6 @@ module.exports = function(webpackEnv) {
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
-      // This is necessary to emit hot updates (currently CSS only):
-      isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Watcher doesn't work well if you mistype casing in a path so we use
       // a plugin that prints an error when you attempt to do this.
       // See https://github.com/facebook/create-react-app/issues/240

@@ -56,7 +56,7 @@ if (process.env.HOST) {
 }
 
 // We require that you explicitly set browsers and do not fall back to
-// browserslist defaults.
+// browserlist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
@@ -90,7 +90,10 @@ checkBrowsers(paths.appPath, isInteractive)
       useTypeScript,
       webpack,
     });
-    compiler.run();
+    compiler.watch({
+      aggregateTimeout: 300,
+      poll: undefined,
+    }, console.log);
 
     const app = setUpServer({
       port,
