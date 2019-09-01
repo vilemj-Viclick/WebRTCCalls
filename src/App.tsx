@@ -1,10 +1,19 @@
 import React from 'react';
-import './App.scss';
+import './styles/main.scss';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      Behold the field in which I grow my fucks. Lay thine eyes upon it and see that it is barren.
+    <div className="app">
+      <aside className="left">
+        <video
+          className="my-cam"
+        />
+      </aside>
+      <aside className="right">
+        <video
+          className="remote-cam"
+        />
+      </aside>
     </div>
   );
 };
